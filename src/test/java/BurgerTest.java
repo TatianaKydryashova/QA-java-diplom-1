@@ -1,4 +1,6 @@
 import static org.junit.Assert.*;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -11,6 +13,7 @@ import praktikum.IngredientType;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
+    Burger burger;
 
     @Mock
     Ingredient ingredient;
@@ -18,16 +21,21 @@ public class BurgerTest {
     @Mock
     Bun bun;
 
+    @Before
+    public void setup() {
+
+        burger = new Burger();
+
+    }
+
     @Test
     public void addIngredient() {
-        Burger burger = new Burger();
         burger.addIngredient(ingredient);
         assertEquals("Неверное количество ингридиентов", 1, burger.ingredients.size());
     }
 
     @Test
     public void removeIngredient() {
-        Burger burger = new Burger();
         burger.addIngredient(ingredient);
         burger.removeIngredient(0);
         assertEquals("Неверное количество ингридиентов", 0, burger.ingredients.size());
@@ -35,7 +43,6 @@ public class BurgerTest {
 
     @Test
     public void moveIngredient() {
-        Burger burger = new Burger();
         burger.addIngredient(ingredient);
         Ingredient secondIngredient = Mockito.mock(Ingredient.class);
         burger.addIngredient(secondIngredient);
@@ -46,7 +53,6 @@ public class BurgerTest {
 
     @Test
     public void getPriceTest() {
-        Burger burger = new Burger();
         burger.setBuns(bun);
         burger.addIngredient(ingredient);
         Mockito.when(bun.getPrice()).thenReturn(100F);
@@ -56,7 +62,6 @@ public class BurgerTest {
 
     @Test
     public void getReceiptTest() {
-        Burger burger = new Burger();
         burger.setBuns(bun);
         burger.addIngredient(ingredient);
         Mockito.when(bun.getName()).thenReturn("black bun");
